@@ -1,0 +1,20 @@
+{
+  "name": "ai/sanitize-middleware",
+  "description": "Global input sanitization middleware for Laravel (XSS, SQLi, DoS)",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Shivaprasad",
+      "email": "prasadshirasangi@.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ai\\SanitizeMiddleware\\": "src/"
+    }
+  }
+}
