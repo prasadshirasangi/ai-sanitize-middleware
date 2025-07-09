@@ -1,6 +1,5 @@
 <?php
-
-namespace Ai\SanitizeMiddleware;
+namespace Ai\Sanitize;
 
 use Closure;
 use Illuminate\Support\Facades\Log;
