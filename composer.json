@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Ai\\SanitizeMiddleware\\": "src/"
+        "Ai\\Sanitize\\": "packages/ai/sanitize-middleware/src/"
     }
-  }
+}
 }
