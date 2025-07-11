@@ -3,26 +3,26 @@ namespace Ai\Sanitize;
 
 use Closure;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SanitizeInput
 {
     public function handle($request, Closure $next)
     {
         $inputs = array_merge_recursive($request->all(), $request->query());
-
         $flatInputs = $this->flattenInputs($inputs);
 
         foreach ($flatInputs as $key => $value) {
             if ($this->hasXSS($value)) {
-                return $this->block("XSS attack", $key, $value);
+                $this->block("XSS attack", $key, $value);
             }
 
             if ($this->hasSQLInjection($value)) {
-                return $this->block("SQL injection", $key, $value);
+                $this->block("SQL injection", $key, $value);
             }
 
             if ($this->hasDangerousPattern($value)) {
-                return $this->block("Malicious pattern", $key, $value);
+                $this->block("Malicious pattern", $key, $value);
             }
         }
 
@@ -50,9 +50,8 @@ class SanitizeInput
     {
         Log::warning("Blocked $type in [$key]:", ['value' => $value]);
 
-        return response()->json([
-            'error' => "Blocked request: $type detected in '$key'."
-        ], 400);
+        // Throw Laravel's default 403 Forbidden exception
+        throw new HttpException(403, "Forbidden: $type detected in '$key'");
     }
 
     protected function hasXSS($value)
