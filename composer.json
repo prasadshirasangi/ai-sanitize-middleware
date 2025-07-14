@@ -7,7 +7,5 @@
       "Ai\\Sanitize\\": "src/"
     }
   },
-  "require": {
-     "prasadshirasangi/ai-sanitize-middleware": "dev-main"
-  }
+  "require": {}
 }
